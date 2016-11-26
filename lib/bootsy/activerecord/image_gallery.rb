@@ -9,16 +9,14 @@ module Bootsy
   # the `destroy_orphans` method, that removes all galleries
   # that do not point to resources older than the given time
   # limit.
-  class ImageGallery < ActiveRecord::Base
-    belongs_to :bootsy_resource, polymorphic: true, autosave: false,
-                                 optional: true
+  class ImageGallery
+    include Mongoid::Document
+
+    belongs_to :bootsy_resource, polymorphic: true, autosave: false, optional: true
     has_many :images, dependent: :destroy
 
     scope :destroy_orphans, lambda { |time_limit|
-      where(
-        'created_at < ? AND bootsy_resource_id IS NULL',
-        time_limit
-      ).destroy_all
+      where(created_at: {'$lt' => time_limit}, bootsy_resource_id: nil).destroy_all
     }
   end
 end
