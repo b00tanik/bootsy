@@ -1,10 +1,12 @@
+require 'carrierwave/orm/activerecord'
+
 module Bootsy
   # Public: Model to reference the actual image stored trough Bootsy.
   # It contains the CarrierWave uploader and belongs to a
   # particular image gallery.
   class Image
-    extend CarrierWave::ActiveRecord
     include Mongoid::Document
+    extend CarrierWave::ActiveRecord
 
     belongs_to :image_gallery, touch: true
 

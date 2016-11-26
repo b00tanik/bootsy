@@ -1,3 +1,5 @@
+require 'carrierwave/orm/activerecord'
+
 module Bootsy
   # Public: A model that groups all images related to a
   # Bootsy container (also called a resource).
@@ -10,8 +12,8 @@ module Bootsy
   # that do not point to resources older than the given time
   # limit.
   class ImageGallery
-    extend CarrierWave::ActiveRecord
     include Mongoid::Document
+    extend CarrierWave::ActiveRecord
 
     belongs_to :bootsy_resource, polymorphic: true, autosave: false, optional: true
     has_many :images, dependent: :destroy
