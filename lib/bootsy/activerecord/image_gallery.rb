@@ -1,4 +1,4 @@
-require 'carrierwave/orm/activerecord'
+require 'carrierwave/mongoid'
 
 module Bootsy
   # Public: A model that groups all images related to a
@@ -13,7 +13,6 @@ module Bootsy
   # limit.
   class ImageGallery
     include Mongoid::Document
-    extend CarrierWave::ActiveRecord
 
     belongs_to :bootsy_resource, polymorphic: true, autosave: false, optional: true
     has_many :images, dependent: :destroy
