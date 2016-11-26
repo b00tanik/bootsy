@@ -42,6 +42,7 @@ module Bootsy
     private
 
     def set_gallery
+      params[:image_gallery_id] = params[:image_gallery_id]['$oid'] if params[:image_gallery_id]['$oid']
       @gallery = ImageGallery.find(params[:image_gallery_id])
     end
 
@@ -84,7 +85,7 @@ module Bootsy
             render json: {
               image: image_markup(@image),
               form: new_image_markup(@gallery),
-              gallery_id: @gallery.id
+              gallery_id: @gallery.id.to_s
             }
           end
         else
