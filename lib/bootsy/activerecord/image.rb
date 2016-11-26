@@ -3,6 +3,7 @@ module Bootsy
   # It contains the CarrierWave uploader and belongs to a
   # particular image gallery.
   class Image
+    extend CarrierWave::ActiveRecord
     include Mongoid::Document
 
     belongs_to :image_gallery, touch: true

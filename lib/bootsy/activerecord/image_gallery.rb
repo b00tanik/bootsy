@@ -10,6 +10,7 @@ module Bootsy
   # that do not point to resources older than the given time
   # limit.
   class ImageGallery
+    extend CarrierWave::ActiveRecord
     include Mongoid::Document
 
     belongs_to :bootsy_resource, polymorphic: true, autosave: false, optional: true
